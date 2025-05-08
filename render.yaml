@@ -1,0 +1,25 @@
+services:
+  # Web service
+  - type: web
+    name: facebook-auto-share
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 main:app
+    autoDeploy: true
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: facebook-auto-share-db
+          property: connectionString
+
+databases:
+  # Database (PostgreSQL)
+  - name: facebook-auto-share-db
+    plan: free
+    postgresMajorVersion: 15
