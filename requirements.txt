@@ -1,0 +1,12 @@
+aiohttp
+email-validator
+flask
+flask-login
+flask-sqlalchemy
+flask-wtf
+gunicorn
+httpx
+psycopg2-binary
+requests
+rich
+werkzeug
